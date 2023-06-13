@@ -51,7 +51,7 @@ export default {
   //   // BCard
   // },
   data: () => ({
-    userlist: [],
+    result: [],
     text: "",
     fields: [
       "name",
@@ -61,21 +61,11 @@ export default {
       "email",
     ],
   }),
-  watch: {
-    text: {
-      handler() {
-        this.userlist = this.search();
-      },
-      immediate: true
-      
-    }
-    
+  computed: {
+    userlist() {
+      return this.search()
+    },
   },
-  // computed: {
-  //   userlist() {
-  //     return this.search()
-  //   },
-  // },
   methods: {
     search() {
       return this.users.filter(
