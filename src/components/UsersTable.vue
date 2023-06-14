@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <CardStyle class="container con1">
     <div class="d-flex">
       <b-row>
         <b-col>
@@ -7,6 +7,7 @@
             v-model="text"
             type="text"
             placeholder="Search"
+            :result="true"
           ></b-form-input>
         </b-col>
       </b-row>
@@ -18,38 +19,29 @@
     <h3 class="result">
       Result <span class="text_gray">({{ userlist.length }})</span>
     </h3>
-    <!-- {{ userlist }} -->
-    <b-table class="bg" hover responsive="m" :fields="fields" :items="userlist">
-      <template #cell(phones)="data">
-        <template v-for="phone in data.item.phones">
-          <div :key="phone" class="border">{{ phone }}</div>
-        </template>
-        <!-- {{ data.item.phones.join() }} -->
-      </template>
-    </b-table>
-    <!-- ขอเก็ยไว้ดูนะจ๊ะ -->
-    <!-- <MyBox>
-      <template v-slot:content1>
-        <b-button>content1</b-button>
-      </template>
-      <template #:content2="dddd">
-        <b-button>{{ dddd }}</b-button>
-      </template>
-    </MyBox>
-    <MyBox :border="true"><b-button></b-button></MyBox>
-    <BCard><b-button></b-button></BCard> -->
-  </div>
+
+    <div class="row gap-4">
+      <CardUser
+        :user="user"
+        v-for="user in userlist"
+        :key="user.name"
+        class="col-3 user-table "
+      >
+      </CardUser>
+    </div>
+  </CardStyle>
 </template>
 
 <script>
-// import MyBox from "./MyBox.vue";
+import CardStyle from "./CardStyle.vue";
+import CardUser from "./CardUser.vue";
 // import { BCard } from 'bootstrap-vue';
 export default {
   props: ["users"],
-  // components: {
-  //   MyBox: MyBox,
-  //   // BCard
-  // },
+  components: {
+    CardUser,
+    CardStyle,
+  },
   data: () => ({
     userlist: [],
     text: "",
@@ -66,16 +58,10 @@ export default {
       handler() {
         this.userlist = this.search();
       },
-      immediate: true
-      
-    }
-    
+      immediate: true,
+    },
   },
-  // computed: {
-  //   userlist() {
-  //     return this.search()
-  //   },
-  // },
+
   methods: {
     search() {
       return this.users.filter(
@@ -86,7 +72,6 @@ export default {
       );
     },
     findInArr(array, keyword) {
-      //some()
       for (let i = 0; i < array.length; i++) {
         const item = array[i];
         if (item.startsWith(keyword)) {
@@ -95,37 +80,28 @@ export default {
       }
       return false;
     },
+    mounted: function () {
+      this.search();
+    },
   },
 };
-
-//   data() {
-//     return {
-
-//       users: [],
-
-//     }
-//   },
-//   mounted() {
-//     fetch('http://localhost:3000/users')
-//       .then((res) => res.json())
-//       .then( data => this.users = data)
-//       .catch( err => console.log(err.message))
-
-//   },
-//   methods:{
-//     MyFunctin(){
-//         this.users = this.users.phone;
-//     }
-//   }
 </script>
 
 <style>
-.table {
-  margin-top: 2rem;
+.con1 {
+  position: absolute;
+  width: 1096px;
+  height: auto;
+  left: 5%;
+  top: 86px;
+  background: #ffffff;
+  box-shadow: 1px 1px 6px rgba(69, 73, 87, 0.12);
+  border-radius: 8px;
+  padding: 24px !important;
 }
 
 .s_bt {
-  margin-left: 1rem;
+  margin-left: 3rem;
   width: 10rem;
   background-color: rgb(89, 13, 204) !important;
 }
@@ -136,13 +112,48 @@ export default {
 
 .result {
   margin-top: 1rem;
+  font-weight: bold;
 }
 
-th {
+/* th {
   background-color: rgb(233, 232, 241) !important ;
-}
+} */
 
+.row{
+  margin-left: 0 !important;
+}
 .text_gray {
   color: rgb(165, 172, 178);
+}
+
+.user-table{
+  width: 22% !important;
+  gap: 10% !important;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.phone {
+  font-size: 12px;
+  color: rgb(140, 145, 150);
+  line-height: 18px;
+}
+
+.email {
+  font-size: 12px;
+  color: rgb(140, 145, 150);
+  line-height: 18px;
+  width: 200px;
+}
+
+.tiny {
+  border-radius: 2px;
+  padding: 2px;
+  background-color: rgb(227, 222, 248);
+  color: rgb(106, 37, 255);
 }
 </style>
