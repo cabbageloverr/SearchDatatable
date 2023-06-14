@@ -101,9 +101,12 @@ export default {
 }
 
 .s_bt {
-  margin-left: 3rem;
-  width: 10rem;
-  background-color: rgb(89, 13, 204) !important;
+  margin-left: 12px;
+  padding: 2px 12px;
+  width: 110px;
+  
+  background: #5119F0 !important;
+  border-radius: 4px !important;
 }
 
 .s_bt:hover {
@@ -123,37 +126,40 @@ export default {
   margin-left: 0 !important;
 }
 .text_gray {
-  color: rgb(165, 172, 178);
+  color: #646D78;
 }
 
 .user-table{
   width: 22% !important;
-  gap: 10% !important;
+  height: 88px;
+
+  line-height: 10px !important;
 }
 
 .name {
   font-weight: bold;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  
 }
 
 .phone {
   font-size: 12px;
   color: rgb(140, 145, 150);
-  line-height: 18px;
 }
 
 .email {
   font-size: 12px;
   color: rgb(140, 145, 150);
-  line-height: 18px;
   width: 200px;
 }
 
 .tiny {
   border-radius: 2px;
-  padding: 2px;
-  background-color: rgb(227, 222, 248);
-  color: rgb(106, 37, 255);
+  justify-content: center;
+align-items: center;
+padding: 0px 4px 1px;
+  background: #EFEDFF;
+  border-radius: 4px;
+  color: #5119F0;
 }
 </style>
